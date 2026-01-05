@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2026 Crypto Market Outlook｜四位講者觀點一頁式報告</title>
+  <meta name="description" content="彙整 Bankless 近期四位講者對 2026 年加密貨幣市場的不同觀點：BTC、ETH、DeFi、RWA、預測市場、制度化與風險。單頁報告可直接 GitHub Pages 上架。">
+  <style>
+    :root{
+      --bg: #0f1220;
+      --panel: #161a36;
+      --panel2:#121633;
+      --text: #eaeaf0;
+      --muted: #cfd3ff;
+      --muted2:#9aa3ff;
+      --line: rgba(255,255,255,.08);
+      --accent:#6bc4c4;
+      --accent2:#9aa3ff;
+      --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1080px; margin:0 auto; padding:0 22px}
+    .hero{
+      padding: 110px 0 72px;
+      background: radial-gradient(circle at top, #1a1f3c, #0f1220 60%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero h1{
+      font-size: 40px;
+      margin: 0 0 14px;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin: 0 auto;
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .chips{margin-top:22px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(31,37,80,.75);
+      color: var(--muted2);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid rgba(154,163,255,.18);
+      backdrop-filter: blur(6px);
+    }
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 9;
+      background: rgba(15,18,32,.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topnav .wrap{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 10px 22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+      font-size: 14px;
+      color:#fff;
+    }
+    .dot{width:10px;height:10px;border-radius:50%; background:var(--accent)}
+    .navlinks{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .navlinks a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 7px 10px;
+      border-radius: 10px;
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    section{padding: 62px 0; border-bottom: 1px solid var(--line);}
+    h2{
+      font-size: 26px;
+      margin: 0 0 10px;
+      line-height:1.25;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+    .sub{
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 900px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media(min-width: 920px){
+      .grid{grid-template-columns: 1fr 1fr;}
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 20px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      color:#fff;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin: 10px 0 0;
+    }
+    .pill{
+      font-size: 12px;
+      color: var(--muted2);
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(154,163,255,.10);
+      border: 1px solid rgba(154,163,255,.18);
+    }
+    .pill.warn{
+      color: #ffd38a;
+      background: rgba(255,204,102,.08);
+      border-color: rgba(255,204,102,.22);
+    }
+    ul{margin:10px 0 0; padding-left: 18px; color: var(--muted)}
+    li{margin: 8px 0}
+    .kvs{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .kvs div:nth-child(odd){
+      color: #fff;
+      opacity:.9;
+    }
+    details{
+      margin-top: 12px;
+      background: rgba(0,0,0,.12);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      color:#fff;
+      font-weight:650;
+      list-style:none;
+      outline:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .detail-body{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .divider{height:1px; background: var(--line); margin:16px 0;}
+    .small{font-size:13px; color: var(--muted); opacity:.95}
+    .footer{
+      padding: 40px 0 60px;
+      color: #7f86c5;
+      text-align:center;
+      font-size: 13px;
+    }
+    .btnTop{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      backdrop-filter: blur(8px);
+    }
+    .btnTop:hover{background: rgba(255,255,255,.10)}
+    .table{
+      width:100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      overflow:hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .table th, .table td{
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    .table th{
+      color:#fff;
+      font-weight:650;
+      background: rgba(255,255,255,.03);
+      text-align:left;
+      width: 140px;
+    }
+    .table tr:last-child td{border-bottom:none}
+    .note{
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(107,196,196,.08);
+      border: 1px solid rgba(107,196,196,.22);
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topnav" id="top">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> 2026 Crypto Outlook · One-Pager</div>
+      <div class="navlinks">
+        <a href="#summary">總覽</a>
+        <a href="#cowen">Ben Cowen</a>
+        <a href="#ryandavid">Ryan & David</a>
+        <a href="#ventures">Bankless Ventures</a>
+        <a href="#mike">Mike Ippolito</a>
+        <a href="#compare">主題快照</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap" style="text-align:center;">
+      <h1>2026 Crypto Market Outlook</h1>
+      <p>
+        以 Bankless 近期四位（組）講者訪談內容為素材，整理他們對 2026 加密市場的不同看法：BTC、ETH、DeFi、RWA、制度化、風險與機會。<br>
+        本頁內容嚴格以你提供的逐字翻譯為準，僅做結構化與排版呈現。
+      </p>
+      <div class="chips">
+        <span class="chip">BTC</span>
+        <span class="chip">ETH</span>
+        <span class="chip">DeFi</span>
+        <span class="chip">Tokenization / RWA</span>
+        <span class="chip">Prediction Markets</span>
+        <span class="chip">Quantum Risk</span>
+        <span class="chip">IR / Value Capture</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <div class="wrap">
+      <h2>總覽｜四種視角</h2>
+      <p class="sub">
+        這四組講者不是在回答同一個問題：有人是週期/宏觀、有人做機構預測後設分析、有人是 VC 主題投資框架、有人是制度化與基本面角度。
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Speaker A｜Ben Cowen</h3>
+          <p class="small">週期 × 宏觀 × 風險管理（偏向：BTC 週期可能已見頂、全面山寨季機率低；ETH 可能上衝但要防 bull trap）</p>
+          <div class="meta">
+            <span class="pill">Cycle</span><span class="pill">Macro</span><span class="pill warn">Bull trap risk</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Speaker B｜Ryan & David</h3>
+          <p class="small">機構預測後設分析（穩定幣支付軌道、代幣化爆發、ETF 擴散、DEX 成長、立法可能）</p>
+          <div class="meta">
+            <span class="pill">Meta-analysis</span><span class="pill">Regulation</span><span class="pill">Tokenization</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Speaker C｜Ben Lakoff & Arnav (Bankless Ventures)</h3>
+          <p class="small">VC × 主題投資 × 創辦人（DeFi／代幣化／資本形成／投機市場；並談 AI agents）</p>
+          <div class="meta">
+            <span class="pill">VC lens</span><span class="pill">Thematic</span><span class="pill">Founder</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Speaker D｜Mike Ippolito</h3>
+          <p class="small">制度化 × 基本面 × 價值捕捉（ETH 好年、BTC 艱困年；IR/GAAP 噪音、DAT 疲弱、企業鏈主題）</p>
+          <div class="meta">
+            <span class="pill">Fundamentals</span><span class="pill">IR</span><span class="pill warn">Quantum narrative</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        你可以把這頁當作「展示層」。後續若要做更像你範例的版本，可以再加：圖表、side nav、動畫、段落間過場與更強的資訊視覺化。
+      </div>
+    </div>
+  </section>
+
+  <!-- BEN COWEN -->
+  <section id="cowen">
+    <div class="wrap">
+      <h2>Ben Cowen｜Into the Cryptoverse（與 Ryan Sean Adams 對談）</h2>
+      <p class="sub">
+        焦點：BTC 週期、ETH 可能路徑、為何本輪缺乏 euphoria、AI 分走注意力、黃金 vs BTC 的矛盾，以及分散配置策略。
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>背景與立場</h3>
+          <div class="kvs">
+            <div>形式</div><div>訪談對談（Into the Cryptoverse × Bankless）</div>
+            <div>主要焦點</div><div>BTC/ETH、週期、宏觀、情緒與市場結構</div>
+            <div>核心警示</div><div>ETH 2026 初若到 5K 可能是 bull trap</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Takeaways（你提供的重點結論）</h3>
+          <ul>
+            <li>比特幣週期長度約 1,060 天，多個週期維持相對一致。</li>
+            <li>少數山寨幣可能在「期中年」（例如 2026 年初）創新高，但全面山寨季不太可能。</li>
+            <li>以太幣走勢被類比 Tesla：先形成更高低點，再拉升至新高，完整循環可能約 1 年。</li>
+            <li>比特幣歷史常反彈到 50 週均線用於「確認熊市」，目前該均線約在 102,000 美元。</li>
+            <li>若 BTC 反彈到 10 萬且 ETH/BTC 到 0.053，ETH 2026 可能到 5,300（甚至 5K–5.3K 情境）。</li>
+            <li>BTC 在 10 月見頂，比 QT 在 12 月結束早兩個月，與 2019 類似。</li>
+            <li>BTC 正對 S&P 500 相對走弱，型態像 2019：股票可能續漲、BTC 可能掙扎。</li>
+            <li>ETH 已超過四年沒有出現「可持續的」新高。</li>
+            <li>總加密市值與黃金相關係數 0.23（弱），與 S&P 500 相關係數 0.61（較強）。</li>
+            <li>若用「S&P 相對黃金」衡量，要回到網路泡沫高點估值水準，S&P 需要相對黃金再漲 258%。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>分主題整理（只用你貼的內容）</h3>
+
+        <details open>
+          <summary>BTC 觀點</summary>
+          <div class="detail-body">
+            <ul>
+              <li>本輪週期可能已見頂；即使見頂，期中年仍可能出現少數資產創新高，造成「看起來像山寨季」的錯覺。</li>
+              <li>歷史上常反彈到 50 週均線作為熊市確認（你提供：目前約 102,000）。</li>
+              <li>BTC 相對 S&P 500 走弱，類似 2019：股票續漲、BTC 掙扎。</li>
+              <li>BTC 被定位為 risk-on 資產，而非像黃金那樣交易。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>ETH 觀點（含 bull trap 警示）</summary>
+          <div class="detail-body">
+            <ul>
+              <li>用 Tesla 類比：先打出更高低點，再挑戰新高；完整循環可能約 1 年。</li>
+              <li>情境推演：若 BTC 到 10 萬、ETH/BTC 到 0.053，ETH 可到 5,300。</li>
+              <li>若 ETH 2026 年初到 5K 之後可能大幅回撤；若 BTC 已在熊市，ETH 新高可能是 bull trap。</li>
+              <li>他提到：本輪唯一可能挑戰新高的「山寨」只看 ETH，其餘多數「cooked」。</li>
+              <li>更健康狀態：2026 夏季前後更長時間橫盤整理；若 ETH 已先跑到 5–6K 反而偏空。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>為何缺乏 euphoria（宏觀、AI、迷因幣）</summary>
+          <div class="detail-body">
+            <ul>
+              <li>更像「BTC 主導週期」，零售熱度不足，頂部可能是「冷漠見頂」。</li>
+              <li>原因包含：貨幣政策與宏觀逆風、市場注意力被 AI 分走、資金錯配到迷因幣造成「劣幣驅逐良幣」。</li>
+              <li>他主張加密需要「拒絕垃圾敘事」、聚焦少數方向（少數鏈 + 互通性），長期零售會回來但可能更慢。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>黃金 vs BTC 的矛盾解釋</summary>
+          <div class="detail-body">
+            <ul>
+              <li>BTC 從來不像黃金那樣交易，更像風險資產；宏觀不確定與財政紀律疑慮上升時，黃金自然受青睞。</li>
+              <li>他用 S&P/M2、S&P/Gold 檢視泡沫：對 M2 看似還有空間；對黃金看更像 1970s，而非 2000。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>投資策略與操作建議</summary>
+          <div class="detail-body">
+            <ul>
+              <li>強調耐心與分散配置：他自己也配置金銀、鈀、鈾、股票、指數基金等。</li>
+              <li>週期型策略：
+                <ul>
+                  <li>買加密較佳區段：期中年過半 → 期中年年底。</li>
+                  <li>ETH 在 regression band 可視為較好的累積區。</li>
+                  <li>BTC 在期中年常回到 200 週均線，可能是較佳累積點。</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- RYAN & DAVID -->
+  <section id="ryandavid">
+    <div class="wrap">
+      <h2>Ryan & David｜Bankless 聖誕夜特別集（預測後設分析）</h2>
+      <p class="sub">
+        形式：把多家機構與研究單位（Bitwise、Coinbase Institutional、Galaxy、Grayscale、CoinShares、Fidelity、a16z、Pantera…）的預測做分類：高度一致、廣泛主題、彼此分歧。
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>背景與方法</h3>
+          <div class="kvs">
+            <div>形式</div><div>聖誕夜特別集（由 weekly roll-up 轉為 2026 預測專集）</div>
+            <div>方法</div><div>多來源預測「後設分析（meta-analysis）」＋分類整理</div>
+            <div>分類</div><div>高度一致／廣泛主題／分歧觀點</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Takeaways（你提供的重點結論）</h3>
+          <ul>
+            <li>Galaxy：2026 穩定幣交易量可能超越 ACH，從基礎設施變成真正支付軌道。</li>
+            <li>多方共識：2026 是資產代幣化爆發年；Coinbase 預估代幣化資產市場或從接近 200 億美元成長至接近 4,000 億美元。</li>
+            <li>Bitwise：2026 美國可能推出超過 100 檔加密相關 ETF。</li>
+            <li>Galaxy：2026 美國現貨加密 ETF 淨流入或超過 500 億美元。</li>
+            <li>多來源：2026 Polymarket 每週交易量將達到或超過 10 億美元。</li>
+            <li>量子計算被視為升高的風險，但多方預測 2026 不構成立即威脅。</li>
+            <li>Galaxy：2026 底 DEX 佔整體現貨交易量可能超過 25%。</li>
+            <li>a16z：隱私是最重要護城河之一，因「祕密」難以跨鏈橋接，形成鎖定效果與網路效應。</li>
+            <li>年度 K 線觀點：2026 BTC 可能小紅或小綠 K（約 -5% 至 -15%，或 +50%）。</li>
+            <li>ETH 估值模型落差：市銷率模型 ~39 美元；Metcalfe’s Law 可到 ~9,400 美元。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>分主題整理（共識／廣泛主題／分歧）</h3>
+
+        <details open>
+          <summary>高度一致：穩定幣支付軌道</summary>
+          <div class="detail-body">
+            <ul>
+              <li>穩定幣從加密基礎設施轉為支付軌道；Galaxy 認為交易量可能超越 ACH。</li>
+              <li>Coinbase Institutional：跨境交易、匯款、薪資平台成長。</li>
+              <li>a16z：把穩定幣視為網際網路基礎結算層。</li>
+              <li>Bitwise：穩定幣可能被指責為動搖某新興市場國家貨幣。</li>
+              <li>消費者可能「無感使用」穩定幣，如同使用 Venmo。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>高度一致：資產代幣化擴張</summary>
+          <div class="detail-body">
+            <ul>
+              <li>代幣化從實驗性試點 → 大規模發行與作為抵押品。</li>
+              <li>CoinShares：2026 為「爆發年」。</li>
+              <li>Galaxy：大型銀行或券商接受代幣化股票作為抵押品。</li>
+              <li>Grayscale：監管明朗帶來成長。</li>
+              <li>Coinbase：市場可能從 200 億美元成長至 4,000 億美元；好處包含 24 小時股票交易與 DeFi 整合（但高度複雜）。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>高度一致：ETF 與市場結構立法</summary>
+          <div class="detail-body">
+            <ul>
+              <li>Bitwise：美國將推出超過 100 檔加密相關 ETF。</li>
+              <li>Galaxy：超過 50 檔現貨山寨幣 ETF + 另外 50 檔加密 ETF；2026 現貨加密 ETF 淨流入或超過 500 億美元。</li>
+              <li>CoinShares：四大券商將在全權委託投資組合中開放 BTC ETF 建議配置；某 401k 供應商允許透過 ETF 配置 BTC。</li>
+              <li>市場結構立法：CoinShares 預測《Clarity Act》將通過；Grayscale 預期跨黨派立法於 2026 成為法律。</li>
+              <li>Coinbase Institutional：清晰監管將改變機構的加密策略與合規方式；Bitwise 把 ETH/SOL 上行情境與 Clarity Act 連結。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>高度一致：預測市場與量子計算</summary>
+          <div class="detail-body">
+            <ul>
+              <li>預測市場：多來源預測 Polymarket 每週交易量達 10 億美元或以上（Galaxy 甚至 15 億）。</li>
+              <li>量子計算：被視為升高風險但不會在 2026 構成立即威脅；但也討論 Nick Carter 的擔憂，BTC 或需更早面對。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>廣泛主題：混合金融（Hybrid Finance）</summary>
+          <div class="detail-body">
+            <ul>
+              <li>CoinShares 提出「混合金融」：公鏈（結算與可組合層）× TradFi（監管、規模、分銷、託管、產品包裝）。</li>
+              <li>例：Canton Network、DTCC 證券代幣化。</li>
+              <li>討論治理與無記名資產不相容；去中心化價值體現在不信任主體仍需互動交易。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>廣泛主題：隱私（Privacy）與 CEX→DEX</summary>
+          <div class="detail-body">
+            <ul>
+              <li>隱私重要性被普遍同意，但路徑分歧：專用隱私鏈 vs 功能內建。</li>
+              <li>Coinbase：ZK、全同態加密持續建設，鏈上隱私使用量增加。</li>
+              <li>Grayscale：ETH/Solana 的機密交易採用率上升。</li>
+              <li>Galaxy：2026 底隱私代幣總市值可能超過 1,000 億美元（並討論「什麼算隱私代幣」）。</li>
+              <li>DEX 市占：Galaxy 預測 2026 底 DEX 佔現貨交易量超過 25%；CoinShares 預測 DEX 每月交易量超過 6,000 億美元。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>廣泛主題：Tokenomics 2.0 與價值捕獲</summary>
+          <div class="detail-body">
+            <ul>
+              <li>多方預測價值捕獲趨勢更明確；Grayscale：可持續營收是核心主題。</li>
+              <li>Coinbase：Tokenomics 2.0（分潤、回購、銷毀）。</li>
+              <li>Galaxy：應用層收入/網路層收入比例翻倍，價值捕獲轉向應用層（Fat App）。</li>
+              <li>提及 Aave Labs 與 Aave DAO 衝突，以及市場希望代幣回饋收入給投資人。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>分歧：DATs 與市場週期</summary>
+          <div class="detail-body">
+            <ul>
+              <li>DAT（數位資產信託）：Coinbase 認為 DAT 進化；Galaxy 預測 5+ 公司被迫出售/併購/倒閉；Grayscale 認為不是 2026 主要因素。</li>
+              <li>市場週期：Bitwise/Grayscale 認為 BTC 打破四年週期並在上半年創新高；Galaxy 認為 2026 混亂、區間寬；Coinbase 認為宏觀驅動，區間約 11–14 萬。</li>
+              <li>也提到年度 K 線觀點：2026 可能小綠 K。</li>
+              <li>ETH：即使 BTC 未創新高，仍可能在特定條件下短暫上 5K+ 後回落。</li>
+              <li>結語提出兩種願景：United Chains of Ethereum vs Specialized AppChains（BTC 作為價值儲存）。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANKLESS VENTURES -->
+  <section id="ventures">
+    <div class="wrap">
+      <h2>Ben Lakoff & Arnav Pagidyala｜Bankless Ventures（2026 投資趨勢）</h2>
+      <p class="sub">
+        一場座談討論：以投資機會為主，聚焦四大主題：DeFi、資產代幣化（Tokenization）、資本形成（Capital Formation）、投機市場（Speculation Markets），並觸及 AI agents。
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>背景與投資框架</h3>
+          <div class="kvs">
+            <div>身份</div><div>Bankless Ventures 成員（投資視角）</div>
+            <div>核心主題</div><div>DeFi／Tokenization／Capital Formation／Speculation</div>
+            <div>方法</div><div>回顧週期、找出解鎖條件、定位可投資方向</div>
+          </div>
+          <div class="divider"></div>
+          <p class="small">
+            你提供的重點：加密正從「逆向論點」演變為「市場共識洞察」；例：Larry Fink、BlackRock BTC ETF、HyperLiquid 淨收入超越 Nasdaq。
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Takeaways（你提供的重點摘要）</h3>
+          <ul>
+            <li>加密從 contrarian thesis → consensus insight；例：Larry Fink、BlackRock BTC ETF、HyperLiquid 淨收入超越 Nasdaq。</li>
+            <li>DeFi 朝制度化發展，但受限：可客製基礎設施不足、可信風險評級缺乏、長尾流動性不足、合約安全問題。</li>
+            <li>借貸從超額抵押/浮動利率 → 更多固定利率、無/低擔保、長尾資產作抵押。</li>
+            <li>U.S. equity perps 的 TAM 估計為目前整個加密交易市場的 15–20 倍。</li>
+            <li>新興市場 DeFi 新銀行可提供美元資產與代幣化美債，有潛力把「DeFi mullet」放大 100 倍。</li>
+            <li>RWA 問題：缺乏即時贖回且依賴 TradFi 軌道；即便完全擔保也可能價格脫鉤（例：Paxos Gold）。</li>
+            <li>垂直整合型代幣化平台（VTPs）涵蓋借款人到放款人全鏈，目標把借貸邊際成本降到接近零。</li>
+            <li>金融虛無主義推動投機市場，年輕世代把投機視為向上流動途徑。</li>
+            <li>加密原生資本結構（capital stack）逐步上鏈，削弱 CEX 權力，經濟活動內部化。</li>
+            <li>AI agents 將成為新型參與者；X402 可能成為虛擬支付標準；AI agent 資產管理者可在 24/7 市場做風險管理。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>內容大綱重點（依你提供的段落）</h3>
+
+        <details open>
+          <summary>第一部分：投資框架與市場週期</summary>
+          <div class="detail-body">
+            <ul>
+              <li>投資導論：強調學會「如何有效投資加密資產」。</li>
+              <li>提到機會主題：DeFi、穩定幣支付、預測市場。</li>
+              <li>市場週期比喻：森林大火（清除雜草後帶來新生）。</li>
+              <li>四個主要浪潮：2017、2021、2024–2025、預期 2029。</li>
+              <li>核心策略：預測 2028–2029 的世界樣貌，提前投資能塑造未來的創辦人與類別。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>第二部分：DeFi 演進、新銀行與交易所</summary>
+          <div class="detail-body">
+            <ul>
+              <li>DeFi 演進回顧：
+                <ul>
+                  <li>第一波：ERC20 與早期交易所（如 EtherDelta）。</li>
+                  <li>第二波（~2021）：慢 DeFi（MakerDAO、Aave、Compound、Uniswap）。</li>
+                  <li>第三波：再質押、模組化借貸（Morpho、Pendle）、演算法穩定幣（如 Athena）。</li>
+                </ul>
+              </li>
+              <li>FTX 後：你提供「約 22–26% 交易量轉移至鏈上」。</li>
+              <li>2026 DeFi 投資方向（你提供的四個）：
+                <ul>
+                  <li>鏈上借貸（固定利率、無擔保、特殊資產、長尾抵押）。</li>
+                  <li>股票永續合約（equity perps）。</li>
+                  <li>DeFi 新銀行（新興市場、美元資產、代幣化美債）。</li>
+                  <li>專門化交易所（RWA、長尾資產、機構客戶；提到 Hyperliquid HIP3）。</li>
+                </ul>
+              </li>
+              <li>新銀行例子：NewBank 約 1,000 億美元估值（你提供），並提及 Coinbase 與 Morpho 整合。</li>
+              <li>「以太坊成為銀行帳本」的抽象層提升描述（你提供）。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>第三部分：資產代幣化與資本形成</summary>
+          <div class="detail-body">
+            <ul>
+              <li>代幣化演進：穩定幣概念驗證 → DeFi 整合 → 通用發行平台（Securitize、Centrifuge、BlackRock）。</li>
+              <li>政策支持：美國財政部長與 Larry Fink 等，使代幣化在法律/政策層面獲得支持（你提供）。</li>
+              <li>核心問題：投資人權利不清晰、缺乏贖回能力；Paxos Gold 脫鉤案例（你提供）。</li>
+              <li>兩大投資方向（你提供）：
+                <ul>
+                  <li>「潛藏市場」代幣化：國債、避險基金、寶可夢卡、太陽能等。</li>
+                  <li>垂直整合型代幣化平台（VTPs）：掌控特定資產類別全鏈，將借貸邊際成本降至零（車貸、太陽能貸款、BNPL 應收帳款）。</li>
+                </ul>
+              </li>
+              <li>資本形成：ICO（2016–2017）→ NFT/早期 D-PIN → MetaDAO/新一輪 ICO；看好合規 ICO 與中小企業鏈上發股；權力由 CEX 轉向鏈上機制（你提供）。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>第四部分：投機、AI 與未來展望</summary>
+          <div class="detail-body">
+            <ul>
+              <li>投機市場：從 ICO、Augur、NFT 到預測市場皆屬加密的一部分（你提供）。</li>
+              <li>金融虛無主義：年輕世代因機會匱乏/薪資停滯，將投機視為向上流動途徑；體育博彩成長；「智識型投機」概念（你提供）。</li>
+              <li>觀點市場（opinion markets）：需流動性與可信結算機制才會突破（你提供）。</li>
+              <li>AI：AI agents 作為新型參與者；X402 與 AI agent 資產管理者在 24/7 市場做風險管理（你提供）。</li>
+              <li>創辦人韌性：Ben Lakoff 強調創辦人敏捷與韌性，著眼 3–6 年長期潛力（你提供）。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIKE IPPOLITO -->
+  <section id="mike">
+    <div class="wrap">
+      <h2>Mike Ippolito｜27 Crypto Predictions for 2026</h2>
+      <p class="sub">
+        以「產業成熟化、價值捕捉、IR/會計標準、賽道整併」為主軸，並對 BTC（量子敘事）、ETH L1（復興）、企業鏈、DAT、預測市場等提出 2026 年預測。
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>市場背景與 2026 定調</h3>
+          <ul>
+            <li>2025 被形容為「史上最好的爛年（the best worst year ever）」：BTC/ETH/SOL 小幅創新高，但市場氛圍令人失望，尤其山寨幣投資人。</li>
+            <li>合規投資路徑正在形成，評價轉向更理性/基本面導向；出現「認知失調」：基本面良好但價格下跌。</li>
+            <li>類比 2001–2002 網際網路：基礎建設鋪設期，需要新建設者利用基礎設施打造下一代企業。</li>
+            <li>預期 2026 多個賽道將整併（consolidation）；「能活下來本身就是勝利」。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>重點預測（你提供的條列）</h3>
+          <ul>
+            <li>GAAP 在 2026 不太可能真正落地（成本與營運負擔高），但會有大量討論噪音。</li>
+            <li>預測市場 2026 仍成功，但情緒轉負面，被指控為「披著外衣的體育賭博」。</li>
+            <li>Ethereum L1 在 2026 復興，並在 RWA 發行市場取得主導地位。</li>
+            <li>Bitcoin 2026 情緒面艱困；量子運算成為市場關注風險議題。</li>
+            <li>新的 Layer 1 投資敘事已結束；ETH 與 SOL 網路效應愈發明顯。</li>
+            <li>企業鏈（Corporate Chains）成為重要主題，但結果好壞參半。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>分段整理（依你提供的 Outlines）</h3>
+
+        <details open>
+          <summary>Part 1：Market Context and 2026 Outlook</summary>
+          <div class="detail-body">
+            <ul>
+              <li>卡位（positioning）、Ethereum 技術進展、Clarity Act 可能通過；預期多賽道整併。</li>
+              <li>除了 BTC/ETH/SOL 外，多數資產仍只是「交易標的（trades）」而非「投資（investments）」。</li>
+              <li>股權市場與加密市場的融合（convergence）被列為核心主題之一。</li>
+              <li>投資人關係（IR）重要性上升：要求更標準化財務揭露，同時整合社群/社交媒體的溝通方式。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Part 2：Financial Standards and Investment Trends</summary>
+          <div class="detail-body">
+            <ul>
+              <li>IR、GAAP 與營收品質：公開交易工具必須具備 IR 能力；GAAP 討論很多但全面導入機率低。</li>
+              <li>雙代幣股權結構（dual token equity structures）通常不可行，且容易背負負面標籤。</li>
+              <li>營收品質：不是所有營收等值；高度循環性營收需警惕，市場更重視黏著度高、可持續的營收。</li>
+              <li>DAT：2026 表現疲弱，僅少數例外（如 Bitmine）。</li>
+              <li>VC：投資低迷；資金從早期投資轉向成長型股權（growth equity）。</li>
+              <li>預測市場：交易量仍成長但低於期待；Kalshi/Polymarket 領先；Robinhood 會成功、Coinbase 不會（產品紀律差異）。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Part 3：Ecosystem Performance and Infrastructure</summary>
+          <div class="detail-body">
+            <ul>
+              <li>Perps：競爭極為激烈；equity perps 起步慢，且在 CEX 表現優於 DEX。</li>
+              <li>2026 整體判斷（你提供）：
+                <ul>
+                  <li>Ethereum：好的一年</li>
+                  <li>Bitcoin：壞的一年</li>
+                  <li>Solana：相對安靜的一年</li>
+                  <li>Hyperliquid：艱困的一年</li>
+                </ul>
+              </li>
+              <li>量子威脅：Hoffman 認為短期討論可能高點，但技術風險在更遠未來；Ippolito 認為市場會把量子當作 BTC 修正的合理化理由。</li>
+              <li>基礎建設整併：新 L1 敘事死亡；L2 框架可能整合多項服務。</li>
+              <li>Base：2026 可能遭遇挫折，其在 Coinbase 商業模式中的角色受質疑。</li>
+              <li>DeFi：亮眼的一年，動能來自 RWA 資金流入與 RWA looping；Vaults 成為主角；Credit Funds 角色顯著提升。</li>
+              <li>企業鏈：Tempo、ARK、Robinhood Chain；預測 BlackRock 宣布推出自己的區塊鏈。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Part 4：Future Goals and Conclusions</summary>
+          <div class="detail-body">
+            <ul>
+              <li>產業目標：提升對世界的實際影響力，擺脫「Wild West」與「詐騙感」形象。</li>
+              <li>專注真正創造價值，向 Web2 學習成熟經驗。</li>
+              <li>提及 ICO 與交易所收購 Launchpad 的可能性。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEME SNAPSHOT / COMPARE -->
+  <section id="compare">
+    <div class="wrap">
+      <h2>主題快照｜BTC / ETH / 賽道 / 風險（快速對照）</h2>
+      <p class="sub">
+        這是「讀者 30 秒掃描版」，只用你提供內容做摘要級對位（不新增任何推論）。
+      </p>
+
+      <table class="table">
+        <tr>
+          <th>BTC</th>
+          <td>
+            <ul>
+              <li><b>Ben Cowen：</b>本輪週期可能已見頂；BTC 是 risk-on；相對 S&P 走弱像 2019；可能反彈至 50 週均線作熊市確認。</li>
+              <li><b>Ryan & David：</b>對 2026 週期與新高存在分歧；量子風險被視為升高但 2026 不立即。</li>
+              <li><b>Bankless Ventures：</b>不是主要價格主線（更多談結構與主題）。</li>
+              <li><b>Mike Ippolito：</b>2026 情緒艱困；量子議題成為關注並可能被用來合理化修正。</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>ETH</th>
+          <td>
+            <ul>
+              <li><b>Ben Cowen：</b>可能到 5K–5.3K 情境，但警告 bull trap；偏好更健康的橫盤累積節奏。</li>
+              <li><b>Ryan & David：</b>估值模型嚴重分裂（~39 到 ~9,400）；在特定條件下可能短暫 5K+ 後回落。</li>
+              <li><b>Bankless Ventures：</b>以太坊抽象層提升、作為金融帳本；承載 DeFi/新銀行/代幣化/資本形成。</li>
+              <li><b>Mike Ippolito：</b>2026 是 ETH 好年；ETH L1 復興，並在 RWA 發行市場主導。</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>DeFi</th>
+          <td>
+            <ul>
+              <li><b>Ben Cowen：</b>偏向「拒絕垃圾敘事、聚焦少數方向（少數鏈+互通性）」；強調效用與收入。</li>
+              <li><b>Ryan & David：</b>DEX 市占上升（>25%）與 tokenomics 2.0（分潤/回購/銷毀）、價值捕獲轉向應用層。</li>
+              <li><b>Bankless Ventures：</b>看好鏈上借貸（固定利率/無擔保/長尾抵押）、DeFi 新銀行、專門化交易所、equity perps。</li>
+              <li><b>Mike Ippolito：</b>2026 DeFi 亮眼，動能來自 RWA 流入與 RWA looping；Vaults 與 Credit Funds 成焦點。</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Tokenization / RWA</th>
+          <td>
+            <ul>
+              <li><b>Ryan & David：</b>共識：2026 代幣化爆發；代幣化股票抵押品；市場規模可能從 ~200 億到 ~4,000 億。</li>
+              <li><b>Bankless Ventures：</b>痛點：缺乏即時贖回、依賴 TradFi 軌道、可能脫鉤（Paxos Gold）；看好 VTP 垂直整合平台與潛藏市場代幣化。</li>
+              <li><b>Mike Ippolito：</b>ETH L1 在 RWA 發行市場取得主導；DeFi 成長動能與 RWA looping 相關。</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Prediction Markets</th>
+          <td>
+            <ul>
+              <li><b>Ryan & David：</b>共識：Polymarket 每週交易量 10 億美元級別（甚至更高）。</li>
+              <li><b>Bankless Ventures：</b>看好「觀點市場（opinion markets）」突破，但需流動性與可信結算。</li>
+              <li><b>Mike Ippolito：</b>仍成功但情緒轉負面，被指控為「體育賭博包裝」；Kalshi/Polymarket 領先；Robinhood 成功、Coinbase 不會。</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>主要風險</th>
+          <td>
+            <ul>
+              <li><b>Ben Cowen：</b>宏觀逆風、AI 分走注意力、迷因幣資金錯配；ETH 上衝可能 bull trap。</li>
+              <li><b>Ryan & David：</b>量子計算是升高風險但 2026 非立即；市場週期高度分歧。</li>
+              <li><b>Bankless Ventures：</b>DeFi 制度化瓶頸：基礎設施可客製化、風險評級、長尾流動性、合約安全；RWA 贖回與 TradFi 依賴。</li>
+              <li><b>Mike Ippolito：</b>量子敘事衝擊 BTC 情緒；基礎建設整併壓力；GAAP/IR 噪音與要求。</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+
+      <div class="note">
+        如果你想更像你提供的範例網站：下一步就是把這張「主題快照」做成視覺化卡片（例如四象限、熱度條、或可切換的 tab），再加上小型圖表與動態滾動效果。
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    © 2026 Tony Murmurcat · Research Notes (Bankless interviews) · For educational use only
+  </div>
+
+  <button class="btnTop" onclick="window.location.hash='#top'">↑ Top</button>
+</body>
+</html>
