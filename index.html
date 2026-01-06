@@ -3,213 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Crypto Market Outlook | Bankless 深度觀點匯總</title>
+    <title>2026 Crypto Market Outlook | Bankless War Room</title>
     <style>
-        /* --- 核心設計系統 --- */
+        /* --- 0. Design System & Reset --- */
         :root {
-            --bg-body: #0B0E14; /* 更深的背景 */
-            --bg-panel: #151A23;
-            --bg-card: #1E232F;
-            --text-main: #E2E8F0;
-            --text-muted: #94A3B8;
-            --text-dim: #64748B;
+            --bg-body: #050505;
+            --bg-panel: #111111;
+            --bg-card: #1A1A1A;
+            --bg-hover: #252525;
             
-            /* 語義顏色 */
-            --bullish: #10B981;
-            --bearish: #EF4444;
-            --neutral: #F59E0B;
-            --highlight: #38BDF8;
+            --text-main: #ECECEC;
+            --text-muted: #A1A1A1;
+            --text-dim: #555555;
+
+            /* Sentiment Colors */
+            --bull: #4ADE80;      /* Green-400 */
+            --bear: #F87171;      /* Red-400 */
+            --warning: #FACC15;   /* Yellow-400 */
+            --neutral: #94A3B8;   /* Slate-400 */
+            --alpha: #A78BFA;     /* Purple-400 */
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
             
-            --border: #2D3748;
-            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --font-mono: "SF Mono", "Monaco", monospace;
+            --border: 1px solid #333;
+            --radius: 8px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            font-family: var(--font-stack);
-            line-height: 1.7; /* 增加行距提升閱讀性 */
-            padding-bottom: 100px;
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding-bottom: 120px;
         }
 
-        /* --- 排版工具 --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
-        .section-header {
-            border-left: 4px solid var(--highlight);
-            padding-left: 15px;
-            margin: 60px 0 30px;
-        }
-
-        .section-header h2 {
-            font-size: 1.5rem;
-            color: white;
+        /* --- 1. Typography & Utilities --- */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        .text-bull { color: var(--bull); }
+        .text-bear { color: var(--bear); }
+        .text-alpha { color: var(--alpha); }
+        .text-mono { font-family: var(--font-mono); }
+        
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+        .tag.bull { background: rgba(74, 222, 128, 0.15); color: var(--bull); border: 1px solid rgba(74, 222, 128, 0.3); }
+        .tag.bear { background: rgba(248, 113, 113, 0.15); color: var(--bear); border: 1px solid rgba(248, 113, 113, 0.3); }
+        .tag.alpha { background: rgba(167, 139, 250, 0.15); color: var(--alpha); border: 1px solid rgba(167, 139, 250, 0.3); }
 
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-            margin-right: 6px;
-        }
-        .tag.bull { background: rgba(16, 185, 129, 0.15); color: var(--bullish); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .tag.bear { background: rgba(239, 68, 68, 0.15); color: var(--bearish); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .tag.neutral { background: rgba(245, 158, 11, 0.15); color: var(--neutral); border: 1px solid rgba(245, 158, 11, 0.3); }
-
-        /* --- Header --- */
+        /* --- 2. Header & Nav --- */
         header {
-            padding: 80px 0 50px;
+            padding: 60px 0 40px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #222;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 70%);
         }
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+        .subtitle { font-family: var(--font-mono); color: var(--text-muted); font-size: 0.9rem; }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: var(--border);
+            z-index: 100;
+            padding: 15px 0;
+            margin-bottom: 40px;
         }
-        .subtitle {
+        .nav-list { display: flex; justify-content: center; gap: 30px; font-family: var(--font-mono); font-size: 0.9rem; }
+        .nav-list a { color: var(--text-muted); transition: 0.2s; }
+        .nav-list a:hover { color: var(--text-main); }
+
+        /* --- 3. Section: Dashboard (Bento Grid) --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card.featured { grid-column: span 2; background: linear-gradient(135deg, #1A1A1A 0%, #111 100%); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono); }
+        .stat-value { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; }
+        .stat-note { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+        .trend-icon { position: absolute; top: 20px; right: 20px; font-size: 1.2rem; opacity: 0.5; }
+
+        /* --- 4. Section: Battlefield (Versus) --- */
+        .battlefield-wrapper {
+            background: var(--bg-panel);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before { content: "//"; color: var(--alpha); font-family: var(--font-mono); }
+        
+        .battle-row {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 30px;
+        }
+        .battle-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .battle-side { flex: 1; padding: 0 20px; }
+        .battle-side.left { text-align: right; border-right: 2px solid #333; }
+        .battle-side.right { text-align: left; }
+        
+        .battle-topic {
+            flex: 0 0 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: var(--font-mono);
-            color: var(--highlight);
-            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: #000;
+            border-radius: 4px;
+            margin: 0 20px;
+            text-align: center;
+            font-size: 0.9rem;
         }
 
-        /* --- 1. The Matrix (高密度版) --- */
-        .matrix-wrapper {
+        .battle-speaker { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; text-transform: uppercase; }
+        .battle-point { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px; }
+        .battle-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- 5. Section: The Matrix (Heatmap) --- */
+        .matrix-container {
             overflow-x: auto;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-panel);
+            border: var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 60px;
         }
-        .matrix-table {
-            width: 100%;
-            min-width: 1000px;
-            border-collapse: collapse;
-        }
+        .matrix-table { width: 100%; min-width: 1000px; border-collapse: collapse; }
         .matrix-table th {
-            text-align: left;
+            background: #000;
             padding: 20px;
-            background: #0f1218;
+            text-align: left;
             color: var(--text-muted);
+            font-family: var(--font-mono);
             font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-bottom: 1px solid var(--border);
+            border-bottom: var(--border);
+            position: sticky;
+            top: 0;
         }
         .matrix-table td {
             padding: 25px 20px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #222;
             vertical-align: top;
-            font-size: 0.95rem;
+            background: var(--bg-panel);
+            transition: 0.2s;
         }
-        .matrix-table tr:last-child td { border-bottom: none; }
-        
-        /* 表格內的清單樣式 */
-        .cell-list { list-style: none; margin-top: 10px; }
-        .cell-list li {
-            position: relative;
-            padding-left: 15px;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        .cell-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--highlight);
-        }
+        .matrix-table tr:hover td { background: var(--bg-hover); }
+        .matrix-table td:first-child { border-right: 1px solid #222; background: #080808; width: 200px; }
 
-        /* --- 2. Key Numbers (數據看板) --- */
-        .numbers-grid {
+        .speaker-name { font-size: 1.1rem; font-weight: 700; color: white; display: block; margin-bottom: 5px; }
+        .speaker-role { font-size: 0.8rem; color: var(--text-dim); }
+        
+        .cell-content h4 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.05em; }
+        .cell-content p { font-size: 0.95rem; margin-bottom: 8px; color: #ddd; }
+        .cell-content li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px; position: relative; padding-left: 12px; }
+        .cell-content li::before { content: "›"; position: absolute; left: 0; color: var(--text-dim); }
+
+        /* Heatmap Indicators */
+        .indicator { width: 8px; height: 8px; display: inline-block; border-radius: 50%; margin-right: 6px; }
+        .indicator.bull { background: var(--bull); box-shadow: 0 0 5px var(--bull); }
+        .indicator.bear { background: var(--bear); box-shadow: 0 0 5px var(--bear); }
+        .indicator.neutral { background: var(--neutral); }
+
+        /* --- 6. Section: Alpha Playbook --- */
+        .playbook-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
-        .number-card {
+        .playbook-col {
             background: var(--bg-card);
-            padding: 20px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
         }
-        .number-label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px; }
-        .number-val { font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 5px; }
-        .number-source { font-size: 0.75rem; color: var(--highlight); font-family: var(--font-mono); text-align: right; }
-
-        /* --- 3. Deep Dive Reports (深度報告) --- */
-        .report-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-        }
-
-        .report-card {
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .report-header {
-            padding: 25px 30px;
-            background: rgba(255,255,255,0.03);
-            border-bottom: 1px solid var(--border);
+        .playbook-title {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
-        
-        .report-body { padding: 30px; }
+        .col-long { border-color: var(--bull); color: var(--bull); }
+        .col-short { border-color: var(--bear); color: var(--bear); }
+        .col-watch { border-color: var(--alpha); color: var(--alpha); }
 
-        .report-section { margin-bottom: 30px; }
-        .report-section:last-child { margin-bottom: 0; }
-        
-        .sub-head {
-            color: var(--highlight);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 12px;
-            font-family: var(--font-mono);
-        }
-
-        .report-text {
-            color: var(--text-muted);
+        .alpha-item {
             margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #333;
         }
-
-        .highlight-box {
-            background: rgba(56, 189, 248, 0.05);
-            border-left: 3px solid var(--highlight);
-            padding: 15px;
-            margin: 20px 0;
-            color: var(--text-main);
-            font-style: italic;
-        }
+        .alpha-item:last-child { border: none; }
+        .alpha-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .alpha-name { font-weight: 700; color: #fff; font-size: 1rem; }
+        .alpha-source { font-size: 0.7rem; color: var(--text-dim); background: #111; padding: 2px 6px; border-radius: 3px; height: fit-content; }
+        .alpha-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .report-header { flex-direction: column; align-items: flex-start; }
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+            .battle-row { flex-direction: column; gap: 15px; }
+            .battle-topic { margin: 10px 0; padding: 10px; }
+            .battle-side.left { text-align: left; border-right: none; border-bottom: 1px dashed #333; padding-bottom: 15px; }
+            .playbook-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -219,172 +253,297 @@
 
     <header>
         <h1>2026 Crypto Market Outlook</h1>
-        <div class="subtitle">Bankless Podcast Series Analysis & Comparison</div>
+        <div class="subtitle">Bankless Podcast Series // Strategic Intelligence Report</div>
     </header>
 
-    <section>
-        <div class="section-header">
-            <h2>00 // 硬數據 (The Key Numbers)</h2>
+    <div class="sticky-nav">
+        <div class="container">
+            <nav class="nav-list">
+                <a href="#dashboard">01. DASHBOARD</a>
+                <a href="#battlefield">02. BATTLEFIELD</a>
+                <a href="#matrix">03. THE MATRIX</a>
+                <a href="#playbook">04. ALPHA PLAYBOOK</a>
+            </nav>
         </div>
-        <div class="numbers-grid">
-            <div class="number-card">
-                <div class="number-label">Cycle Length</div>
-                <div class="number-val">1,060 Days</div>
-                <div class="number-source">Source: Ben Cowen</div>
-                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">比特幣歷史週期長度</div>
+    </div>
+
+    <section id="dashboard" style="margin-bottom: 80px;">
+        <div class="section-title">01. MARKET VITAL SIGNS</div>
+        <div class="dashboard-grid">
+            <div class="stat-card featured" style="border-top: 3px solid var(--bull);">
+                <div class="stat-label text-bull">Institutional Bull Case</div>
+                <div class="stat-value">$140,000</div>
+                <div class="stat-note">
+                    BTC Price Target (Coinbase / Bankless)<br>
+                    <span style="color: var(--text-dim)">驅動力：機構配置、ETF 資金流入</span>
+                </div>
+                <div class="trend-icon">📈</div>
             </div>
-            <div class="number-card">
-                <div class="number-label">RWA Market 2026</div>
-                <div class="number-val">$400 Billion</div>
-                <div class="number-source">Source: Coinbase / Ryan</div>
-                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">代幣化資產預估規模</div>
+
+            <div class="stat-card" style="border-top: 3px solid var(--bear);">
+                <div class="stat-label text-bear">Bear Confirmation</div>
+                <div class="stat-value">$102,000</div>
+                <div class="stat-note">
+                    50-Week Moving Average<br>
+                    <span style="color: var(--text-dim)">Source: Ben Cowen (跌破即熊市)</span>
+                </div>
+                <div class="trend-icon">⚠️</div>
             </div>
-            <div class="number-card">
-                <div class="number-label">BTC Target</div>
-                <div class="number-val">$140,000</div>
-                <div class="number-source">Source: Coinbase / Ryan</div>
-                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">機構派的牛市目標區間</div>
+
+            <div class="stat-card">
+                <div class="stat-label text-alpha">RWA Market 2026</div>
+                <div class="stat-value">$400 B</div>
+                <div class="stat-note">
+                    Tokenized Asset Market<br>
+                    <span style="color: var(--text-dim)">Source: Coinbase / Ryan</span>
+                </div>
             </div>
-            <div class="number-card">
-                <div class="number-label">Bear Confirmation</div>
-                <div class="number-val">$102,000</div>
-                <div class="number-source">Source: Ben Cowen</div>
-                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">50週均線關鍵防守位</div>
+
+            <div class="stat-card">
+                <div class="stat-label" style="color: var(--warning)">Cycle Alert</div>
+                <div class="stat-value">1,060 Days</div>
+                <div class="stat-note">
+                    Historical Cycle Length<br>
+                    <span style="color: var(--text-dim)">目前已接近歷史週期頂部</span>
+                </div>
             </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Derivatives TAM</div>
+                <div class="stat-value">20x</div>
+                <div class="stat-note">
+                    Equity Perps vs. Crypto Trading<br>
+                    <span style="color: var(--text-dim)">Source: Bankless Ventures</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label text-bull">Stablecoins</div>
+                <div class="stat-value">&gt; ACH</div>
+                <div class="stat-note">
+                    Transaction Volume Flippening<br>
+                    <span style="color: var(--text-dim)">支付網絡將超越傳統銀行結算</span>
+                </div>
+            </div>
+            
+            <div class="stat-card" style="border-top: 3px solid var(--neutral);">
+                <div class="stat-label">Black Swan Risk</div>
+                <div class="stat-value">Quantum</div>
+                <div class="stat-note">
+                    Computer Threat Sentiment<br>
+                    <span style="color: var(--text-dim)">Mike: 市場下跌時的完美藉口</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section>
-        <div class="section-header">
-            <h2>01 // 深度比較矩陣 (Detailed Matrix)</h2>
+    <section id="battlefield">
+        <div class="section-title">02. CONSENSUS VS. CONFLICT (戰場視圖)</div>
+        <div class="battlefield-wrapper">
+            
+            <div class="battle-row">
+                <div class="battle-side left">
+                    <div class="battle-speaker text-bear">Ben Cowen</div>
+                    <div class="battle-point">週期已見頂 (Topped Out)</div>
+                    <div class="battle-desc">1,060 天週期理論。2025 年末就像 2019 年，在 QT 結束前見頂。</div>
+                </div>
+                <div class="battle-topic">MARKET CYCLE</div>
+                <div class="battle-side right">
+                    <div class="battle-speaker text-bull">Bankless Hosts</div>
+                    <div class="battle-point">超級週期 (Supercycle)</div>
+                    <div class="battle-desc">機構進場打破 4 年規則。2026 是由監管與機構驅動的「混合金融」爆發年。</div>
+                </div>
+            </div>
+
+            <div class="battle-row">
+                <div class="battle-side left">
+                    <div class="battle-speaker text-bear">Ben Cowen</div>
+                    <div class="battle-point">沒有山寨季 (No Alt Season)</div>
+                    <div class="battle-desc">缺乏狂熱 (Euphoria)，資金與人才被 AI 吸走。大部分山寨幣 "Cooked"。</div>
+                </div>
+                <div class="battle-topic">ALTCOINS</div>
+                <div class="battle-side right">
+                    <div class="battle-speaker text-alpha">Bankless Ventures</div>
+                    <div class="battle-point">金融虛無主義 (Nihilism)</div>
+                    <div class="battle-desc">年輕人因階級固化轉向投機。Meme 與意見市場將因「賭博需求」而持續繁榮。</div>
+                </div>
+            </div>
+
+            <div class="battle-row">
+                <div class="battle-side left">
+                    <div class="battle-speaker text-warning">Ben Cowen</div>
+                    <div class="battle-point">牛市陷阱 (Bull Trap)</div>
+                    <div class="battle-desc">可能隨 BTC 反彈至 $5,300，但如同 Tesla 過去走勢，這可能是最後的逃命波。</div>
+                </div>
+                <div class="battle-topic">ETHEREUM</div>
+                <div class="battle-side right">
+                    <div class="battle-speaker text-bull">Mike Ippolito</div>
+                    <div class="battle-point">文藝復興 (Renaissance)</div>
+                    <div class="battle-desc">新公鏈交易已死 (New L1 Trade is Dead)。ETH 將贏得 RWA 發行市場，重拾霸主地位。</div>
+                </div>
+            </div>
+
         </div>
-        <div class="matrix-wrapper">
+    </section>
+
+    <section id="matrix">
+        <div class="section-title">03. DETAILED MATRIX (觀點熱力圖)</div>
+        <div class="matrix-container">
             <table class="matrix-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">講者 / 立場</th>
-                        <th style="width: 25%;">Bitcoin 觀點</th>
-                        <th style="width: 25%;">Ethereum 觀點</th>
-                        <th style="width: 30%;">2026 關鍵預測 (Alpha)</th>
+                        <th style="width: 15%">SPEAKER</th>
+                        <th style="width: 25%">BITCOIN & MACRO</th>
+                        <th style="width: 25%">ETHEREUM & L1s</th>
+                        <th style="width: 35%">2026 ALPHA / THESIS</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <strong style="color: white; font-size: 1.1rem;">Ben Cowen</strong><br>
-                            <span style="color: var(--text-dim); font-size: 0.85rem;">宏觀數據派</span><br><br>
-                            <span class="tag bear">Cautious</span>
+                            <span class="speaker-name">Ben Cowen</span>
+                            <span class="speaker-role">Macro Cyclical</span>
+                            <div style="margin-top:10px;">
+                                <span class="tag bear">Bearish</span>
+                            </div>
                         </td>
                         <td>
-                            <strong>週期見頂風險高</strong>
-                            <ul class="cell-list">
-                                <li><strong>1,060 天理論：</strong> 歷史顯示週期長度固定，2025 年末已到頂。</li>
-                                <li><strong>類比 2019：</strong> 在 QT (量化緊縮) 結束前兩個月見頂。</li>
-                                <li><strong>弱勢訊號：</strong> 對 S&P 500 匯率持續走跌 (Bleeding against stocks)。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator bear"></span>週期風險高</h4>
+                                <p>BTC 對標 S&P500 持續失血 (Bleeding)。若跌破 50 週均線 ($102k)，熊市確認。</p>
+                                <ul>
+                                    <li>1,060 天週期理論 (Time-based)。</li>
+                                    <li>宏觀類似 2019 (QT 結束前見頂)。</li>
+                                </ul>
+                            </div>
                         </td>
                         <td>
-                            <strong>潛在的牛市陷阱</strong>
-                            <ul class="cell-list">
-                                <li><strong>Tesla 走勢分身：</strong> 價格結構與過去的 Tesla 高度重疊 (Higher Low → New High)。</li>
-                                <li><strong>唯一目標：</strong> 若 BTC 守住均線，ETH 可能衝至 $5,300，但這可能是最後的逃命波。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator warning"></span>逃命波結構</h4>
+                                <p>價格結構類比 Tesla (Higher Low → New High)。</p>
+                                <ul>
+                                    <li>目標價 $5,300 (若 BTC 守住)。</li>
+                                    <li>這可能是 Bull Trap。</li>
+                                </ul>
+                            </div>
                         </td>
                         <td>
-                            <ul class="cell-list">
-                                <li><strong>沒有山寨季：</strong> 明確反對 "Alt Season" 會發生的觀點。</li>
-                                <li><strong>資金流向 AI：</strong> 開發者與資金被 AI 吸走，Crypto 缺乏創新與狂熱。</li>
-                                <li><strong>策略：</strong> 現金為王，等待 2026 夏季後的真正底部。</li>
-                            </ul>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <strong style="color: white; font-size: 1.1rem;">Bankless Hosts</strong><br>
-                            <span style="color: var(--text-dim); font-size: 0.85rem;">機構採用派</span><br><br>
-                            <span class="tag bull">Institutional</span>
-                        </td>
-                        <td>
-                            <strong>打破週期的超級牛市</strong>
-                            <ul class="cell-list">
-                                <li><strong>宏觀驅動：</strong> 2026 是由監管與機構驅動的，BTC 目標 $110k-$140k。</li>
-                                <li><strong>長期隱憂：</strong> 唯一擔心的是「量子計算」威脅，認為 BTC 代碼升級太慢。</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <strong>基本面與價格背離</strong>
-                            <ul class="cell-list">
-                                <li><strong>網絡強：</strong> L1 擴容成功，ZK 技術落地。</li>
-                                <li><strong>資產弱：</strong> 市場對 ETH 估值模型分歧巨大 ($39 vs $9,400)。</li>
-                                <li><strong>統一大業：</strong> 最終願景是 "United Chains of Ethereum"。</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="cell-list">
-                                <li><strong>穩定幣支付：</strong> 交易量將超越傳統銀行 ACH 系統。</li>
-                                <li><strong>RWA 爆發：</strong> 市場規模從 200 億衝向 4000 億美元。</li>
-                                <li><strong>混合金融 (Hybrid Finance)：</strong> 華爾街開始使用公鏈作為結算層。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator neutral"></span>現金與多元配置</h4>
+                                <p>AI 吸走資金與開發者，Crypto 缺乏創新故事。</p>
+                                <ul>
+                                    <li>大部分山寨幣已死 (Cooked)。</li>
+                                    <li>策略：持有現金/黃金，等待 2026 下半年底部。</li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <strong style="color: white; font-size: 1.1rem;">Bankless Ventures</strong><br>
-                            <span style="color: var(--text-dim); font-size: 0.85rem;">風投獵人</span><br><br>
-                            <span class="tag neutral">Alpha Hunter</span>
+                            <span class="speaker-name">Ryan & David</span>
+                            <span class="speaker-role">Institutional</span>
+                            <div style="margin-top:10px;">
+                                <span class="tag bull">Bullish</span>
+                            </div>
                         </td>
                         <td>
-                            <strong>已成共識資產</strong>
-                            <ul class="cell-list">
-                                <li>不再是「反向投資」，而是 Larry Fink (BlackRock) 認證的共識資產。</li>
-                                <li>比起 BTC 本身，更關注其帶來的「宏觀解鎖」效應。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator bull"></span>打破週期</h4>
+                                <p>目標 $110k - $140k。這不是散戶牛市，是機構與監管驅動的超級週期。</p>
+                                <ul>
+                                    <li>主要擔憂：量子計算 (Quantum) 是長期隱憂。</li>
+                                </ul>
+                            </div>
                         </td>
                         <td>
-                            <strong>未來的銀行底層</strong>
-                            <ul class="cell-list">
-                                <li>將 ETH 視為 Global Banking Ledger。</li>
-                                <li>重點關注其上的 DeFi Neobanks (去中心化新銀行) 應用。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator bull"></span>United Chains</h4>
+                                <p>ETH 是「全球銀行帳本」。看好 Layer 2 整合與 ZK 技術落地。</p>
+                                <ul>
+                                    <li>ETH 估值模型分歧巨大 ($39 vs $9,400)。</li>
+                                </ul>
+                            </div>
                         </td>
                         <td>
-                            <ul class="cell-list">
-                                <li><strong>垂直型 RWA：</strong> 專注單一資產 (如車貸、寶可夢卡) 的一條龍平台。</li>
-                                <li><strong>意見市場 (Opinion Markets)：</strong> 預測市場的進階版，賭主觀話題 (Virality)。</li>
-                                <li><strong>金融虛無主義：</strong> 年輕人因階級固化而轉向高風險投機，這將持續推動市場。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator alpha"></span>Hybrid Finance</h4>
+                                <p>TradFi 使用公鏈作為結算層。</p>
+                                <ul>
+                                    <li><strong>Prediction Markets:</strong> 每週 10 億鎂交易量。</li>
+                                    <li><strong>Privacy:</strong> ZK/FHE 技術與隱私代幣爆發。</li>
+                                    <li><strong>Stablecoins:</strong> 交易量超越 ACH。</li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <strong style="color: white; font-size: 1.1rem;">Mike Ippolito</strong><br>
-                            <span style="color: var(--text-dim); font-size: 0.85rem;">基本面整併派</span><br><br>
-                            <span class="tag bear">Fundamental</span>
+                            <span class="speaker-name">Ben & Arnav</span>
+                            <span class="speaker-role">VC / Alpha Hunters</span>
+                            <div style="margin-top:10px;">
+                                <span class="tag alpha">Opportunistic</span>
+                            </div>
                         </td>
                         <td>
-                            <strong>艱難的一年</strong>
-                            <ul class="cell-list">
-                                <li><strong>情緒轉空：</strong> 預測 2026 對 BTC 情緒面不利。</li>
-                                <li><strong>量子藉口：</strong> 市場會在下跌時拿「量子計算」當作藉口 (Excuse for correction)。</li>
-                                <li><strong>跑輸黃金：</strong> 在滯脹環境下表現可能不如黃金。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator bull"></span>共識資產</h4>
+                                <p>Crypto 已從「反向投資」變為「共識投資」(Larry Fink 認證)。</p>
+                            </div>
                         </td>
                         <td>
-                            <strong>文藝復興 (Renaissance)</strong>
-                            <ul class="cell-list">
-                                <li><strong>RWA 贏家：</strong> ETH 將贏得大部分 RWA 發行份額。</li>
-                                <li><strong>重新評級：</strong> 新 L1 交易已死，資金回流 ETH/SOL 這些具備強大網絡效應的鏈。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator alpha"></span>DeFi Neobanks</h4>
+                                <p>在新興市場，DeFi 直接取代銀行功能，提供美元與美債收益。</p>
+                            </div>
                         </td>
                         <td>
-                            <ul class="cell-list">
-                                <li><strong>DeFi 信用基金：</strong> 機構資金透過 Vaults 流入 DeFi。</li>
-                                <li><strong>企業鏈 (Corporate Chains)：</strong> 像 BlackRock 可能發布自己的鏈，但 Base 這類可能會掙扎。</li>
-                                <li><strong>產業整合：</strong> 像 2002 年網路泡沫後一樣，只有真正有營收的能活下來。</li>
-                            </ul>
+                            <div class="cell-content">
+                                <h4><span class="indicator alpha"></span>Financial Nihilism</h4>
+                                <p>年輕人因階級固化而轉向高風險投機。</p>
+                                <ul>
+                                    <li><strong>Opinion Markets:</strong> 預測市場的「病毒式」變體。</li>
+                                    <li><strong>Vertical RWA:</strong> 專注單一資產 (車貸/卡牌) 的垂直平台。</li>
+                                    <li><strong>AI Agents:</strong> 24/7 的鏈上資產管理者。</li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span class="speaker-name">Mike Ippolito</span>
+                            <span class="speaker-role">Fundamental</span>
+                            <div style="margin-top:10px;">
+                                <span class="tag neutral">Realistic</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <h4><span class="indicator bear"></span>情緒艱難</h4>
+                                <p>BTC 可能因「量子計算」FUD 而回調。在滯脹環境下可能跑輸黃金。</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <h4><span class="indicator bull"></span>New L1 is Dead</h4>
+                                <p>市場不再需要通用新公鏈。資金將回流具備網絡效應的 ETH 與 SOL。</p>
+                                <ul>
+                                    <li>ETH 將贏得 RWA 發行權。</li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <h4><span class="indicator neutral"></span>Consolidation</h4>
+                                <p>像 2002 年網路泡沫後，基礎建設過剩，進入整合期。</p>
+                                <ul>
+                                    <li><strong>Equity Perps:</strong> 競爭激烈，CEX 表現優於 DEX。</li>
+                                    <li><strong>Corporate Chains:</strong> 多數企業鏈 (如 Ark/Tempo) 會失敗。</li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -392,113 +551,93 @@
         </div>
     </section>
 
-    <section>
-        <div class="section-header">
-            <h2>02 // 講者核心論述 (Detailed Analysis)</h2>
-        </div>
-        <div class="report-grid">
+    <section id="playbook">
+        <div class="section-title">04. ALPHA PLAYBOOK (行動指南)</div>
+        <div class="playbook-grid">
+            
+            <div class="playbook-col col-long">
+                <div class="playbook-title">🚀 LONG / ACCUMULATE</div>
+                
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">Vertical RWA</span>
+                        <span class="alpha-source">BV</span>
+                    </div>
+                    <div class="alpha-desc">不要買通用 RWA 平台。尋找專注於特定資產類別（如太陽能融資、收藏品）並垂直整合的協議。</div>
+                </div>
 
-            <article class="report-card">
-                <div class="report-header">
-                    <div>
-                        <h3 style="color: white; font-size: 1.4rem;">Ben Cowen: 數據不說謊，小心多頭陷阱</h3>
-                        <div style="color: var(--highlight);">觀點：宏觀週期派 (Macro Cyclical)</div>
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">Prediction Markets</span>
+                        <span class="alpha-source">Hosts/Mike</span>
                     </div>
-                    <span class="tag bear">Bearish / Cautious</span>
+                    <div class="alpha-desc">Polymarket 及其競品。重點關注 "Opinion Markets" (意見市場) 這一變體。</div>
                 </div>
-                <div class="report-body">
-                    <div class="report-section">
-                        <div class="sub-head">核心邏輯：1,060 天與貨幣政策</div>
-                        <p class="report-text">Ben 的核心論點建立在嚴格的歷史數據上。他指出比特幣的週期長度驚人地一致（約 1,060 天）。2025 年 10 月左右市場可能已經見頂。他認為本輪週期類似 2019 年：市場在量化緊縮 (QT) 結束前就因流動性枯竭而見頂，而非在貨幣寬鬆時。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">為何沒有山寨季 (No Alt Season)？</div>
-                        <p class="report-text">不同於大眾期待的「萬幣齊漲」，Ben 認為市場缺乏「狂熱 (Euphoria)」。2021 年的狂熱源自於 Fed 的錯誤貨幣政策（過度印鈔），但現在利率仍高。此外，AI 產業吸走了大量的科技人才與投機資金，導致 Crypto 除了 Meme Coin 外缺乏新故事。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">對 Ethereum 的獨特看法</div>
-                        <p class="report-text">他展示了 ETH 目前的價格結構與 Tesla 過去的走勢高度重疊（先創一個 Higher Low，再衝新高）。如果 BTC 能守住 $102,000，ETH 有機會衝上 $5,300。但這是一個「高風險博弈」，因為這可能是最後的逃命波。</p>
-                    </div>
-                    <div class="highlight-box">
-                        "If you wait for the robins, spring will be over." (如果你等到訊號明確才進場，行情早就結束了。)
-                    </div>
-                </div>
-            </article>
 
-            <article class="report-card">
-                <div class="report-header">
-                    <div>
-                        <h3 style="color: white; font-size: 1.4rem;">Bankless Hosts: 機構接管，混合金融時代</h3>
-                        <div style="color: var(--highlight);">觀點：機構共識 (Institutional Consensus)</div>
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">DeFi Neobanks</span>
+                        <span class="alpha-source">BV</span>
                     </div>
-                    <span class="tag bull">Bullish</span>
+                    <div class="alpha-desc">關注在新興市場提供「美元帳戶 + 美債收益」的 DeFi 應用，這是真正的 PMF。</div>
                 </div>
-                <div class="report-body">
-                    <div class="report-section">
-                        <div class="sub-head">Hybrid Finance (混合金融)</div>
-                        <p class="report-text">這是他們對 2026 的核心定義。傳統金融 (TradFi) 不會創建自己的封閉系統，而是會將公有區塊鏈（如 Ethereum）作為「結算層」。銀行負責合規與客戶前端，區塊鏈負責後端結算。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">關鍵預測：穩定幣與 ETF</div>
-                        <p class="report-text">
-                            1. <strong>穩定幣：</strong> 不再只是加密貨幣的交易媒介，而是成為跨境支付、薪資發放的真實軌道。預計交易量超越 ACH。<br>
-                            2. <strong>ETF：</strong> 預測將有超過 100 檔加密相關 ETF 在美國上市，資產配置平台將把 BTC 加入標準投資組合。
-                        </p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">最大的恐懼：量子計算</div>
-                        <p class="report-text">雖然看多價格，但他們與 Mike Ippolito 高度共識一點：比特幣社群對「量子計算」的威脅過於輕忽。如果不進行代碼升級，這將是長期最大的尾部風險。</p>
-                    </div>
-                </div>
-            </article>
+            </div>
 
-            <article class="report-card">
-                <div class="report-header">
-                    <div>
-                        <h3 style="color: white; font-size: 1.4rem;">Bankless VC: 金融虛無主義與新賽道</h3>
-                        <div style="color: var(--highlight);">觀點：尋找 Alpha (Thesis Driven)</div>
+            <div class="playbook-col col-short">
+                <div class="playbook-title">🔻 SHORT / AVOID</div>
+                
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">Generic Altcoins</span>
+                        <span class="alpha-source">Ben Cowen</span>
                     </div>
-                    <span class="tag neutral">Alpha Hunters</span>
+                    <div class="alpha-desc">除了少數強勢幣，大多數 2021/2024 的山寨幣已經 "Cooked"，不會有新高。</div>
                 </div>
-                <div class="report-body">
-                    <div class="report-section">
-                        <div class="sub-head">社會觀察：金融虛無主義 (Financial Nihilism)</div>
-                        <p class="report-text">這是一個非常深刻的觀點。Arnav 指出，年輕一代因為薪資停滯與房價高漲，對傳統理財感到絕望。這導致他們轉向高風險投機（Meme coins, Gambling），視其為階級流動的唯一機會。這股力量將推動「意見市場 (Opinion Markets)」與投機賽道的成長。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">Verticalized RWA (垂直化代幣資產)</div>
-                        <p class="report-text">他們不看好通用的 RWA 平台，而是看好「垂直整合」的平台。例如：一個專門做「太陽能板融資」或「寶可夢卡牌」的平台，能掌握從資產端到資金端的所有數據，將借貸的邊際成本降至零。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">AI Agents</div>
-                        <p class="report-text">預測 AI 代理人將成為鏈上的主要使用者。它們需要 24/7 的資產管理與支付標準（如 X402 協議），這是人類無法做到的。</p>
-                    </div>
-                </div>
-            </article>
 
-            <article class="report-card">
-                <div class="report-header">
-                    <div>
-                        <h3 style="color: white; font-size: 1.4rem;">Mike Ippolito: 2002 網路泡沫後的重建期</h3>
-                        <div style="color: var(--highlight);">觀點：基本面與產業整合 (Consolidation)</div>
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">New Layer 1s</span>
+                        <span class="alpha-source">Mike Ippolito</span>
                     </div>
-                    <span class="tag bear">Fundamental</span>
+                    <div class="alpha-desc">"New L1 Trade is Dead". 除非有極強的垂直應用場景，否則不要碰新的通用公鏈。</div>
                 </div>
-                <div class="report-body">
-                    <div class="report-section">
-                        <div class="sub-head">歷史類比：1995 vs 2002</div>
-                        <p class="report-text">Mike 認為現在不像 1995 年（網際網路剛開始），而像 2002 年（泡沫破裂後）。基礎設施（光纖/公鏈）已經過度建設，現在是「整合」的時期。只有那些能產生真實營收、有護城河的項目能活下來。</p>
+
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">Corporate Chains</span>
+                        <span class="alpha-source">Mike Ippolito</span>
                     </div>
-                    <div class="report-section">
-                        <div class="sub-head">認知失調 (Cognitive Dissonance)</div>
-                        <p class="report-text">這解釋了為什麼 2025 年讓人感覺很怪。好消息頻傳（ETF、監管），但幣價不漲。這是因為市場正在從「賭博場」轉型為「正規資本市場」。投資人關係 (IR)、財報標準 (GAAP) 將變得至關重要。</p>
-                    </div>
-                    <div class="report-section">
-                        <div class="sub-head">新公鏈已死，ETH 文藝復興</div>
-                        <p class="report-text">他大膽預測 "New Layer 1 trade is dead"。市場不再需要更多通用的公鏈。資金將回流到最具網絡效應的 Ethereum 與 Solana。ETH 將在 RWA 發行領域迎來文藝復興。</p>
-                    </div>
+                    <div class="alpha-desc">企業發行的鏈 (如 Tempo/Ark) 大多數會失敗或表現平平，類似 2018 年的聯盟鏈。</div>
                 </div>
-            </article>
+            </div>
+
+            <div class="playbook-col col-watch">
+                <div class="playbook-title">👀 WATCH / MONITOR</div>
+                
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">Quantum FUD</span>
+                        <span class="alpha-source">Multiple</span>
+                    </div>
+                    <div class="alpha-desc">當市場下跌時，媒體會大量報導「量子計算破解比特幣」。這可能是最佳買點，也可能是長期威脅。</div>
+                </div>
+
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">ETH/BTC Ratio</span>
+                        <span class="alpha-source">Ben Cowen</span>
+                    </div>
+                    <div class="alpha-desc">關鍵指標。若 ETH/BTC 無法守住支撐，所謂的 ETH 文藝復興將是一場空。</div>
+                </div>
+
+                <div class="alpha-item">
+                    <div class="alpha-header">
+                        <span class="alpha-name">AI Agents (X402)</span>
+                        <span class="alpha-source">BV</span>
+                    </div>
+                    <div class="alpha-desc">關注 X402 支付標準。AI 代理人將成為鏈上的主要使用者與交易者。</div>
+                </div>
+            </div>
 
         </div>
     </section>
