@@ -1,292 +1,216 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Crypto Market Outlook | Research Structure</title>
+    <title>2026 Crypto Market Outlook | Bankless 觀點匯總</title>
     <style>
-        /* RESEARCH-GRADE CSS RESET & BASE STYLES */
+        /* --- 核心變數與重置 --- */
         :root {
-            --bg-color: #0B0E14; /* Deep Slate/Black */
-            --panel-bg: #151A23; /* Slightly lighter for distinction */
-            --text-primary: #E2E8F0;
-            --text-secondary: #94A3B8;
-            --text-muted: #64748B;
-            --accent-border: #2D3748;
-            --accent-highlight: #38BDF8; /* Research Blue */
-            --accent-consensus: #10B981; /* Green */
-            --accent-divergence: #F59E0B; /* Amber */
+            --bg-dark: #0f1115;
+            --bg-card: #1a1d24;
+            --bg-card-hover: #222630;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80; /* Bullish */
+            --accent-red: #f87171;   /* Bearish */
+            --accent-yellow: #facc15; /* Neutral/Warning */
+            --border-color: #2d3748;
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-primary);
             font-family: var(--font-main);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            font-size: 16px;
+            padding-bottom: 80px;
         }
 
-        /* UTILITIES */
+        a { color: var(--accent-blue); text-decoration: none; }
+        
+        /* --- 佈局工具 --- */
         .container {
-            max-width: 1000px; /* Optimized for reading density */
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
         }
 
-        .mono {
-            font-family: var(--font-mono);
-            font-size: 0.9em;
-        }
-
-        .placeholder {
-            color: var(--accent-highlight);
-            background: rgba(56, 189, 248, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px dashed rgba(56, 189, 248, 0.3);
+        .tag {
             display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 5px;
         }
+        .tag.bull { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.3); }
+        .tag.bear { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.3); }
+        .tag.neutral { background: rgba(250, 204, 21, 0.15); color: var(--accent-yellow); border: 1px solid rgba(250, 204, 21, 0.3); }
 
-        .long-form-placeholder {
-            border-left: 3px solid var(--accent-border);
-            padding-left: 20px;
-            margin: 15px 0;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* 1. HEADER */
+        /* --- 1. Header --- */
         header {
-            margin-bottom: 60px;
-            border-bottom: 1px solid var(--accent-border);
-            padding-bottom: 20px;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            text-align: center;
         }
-
         h1 {
             font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
             margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        .subtitle {
-            font-family: var(--font-mono);
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* 2. EXECUTIVE SIGNALS */
+        /* --- 2. The Matrix (比較矩陣) --- */
         .section-title {
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 1.5rem;
             margin-bottom: 20px;
-            border-bottom: 1px solid var(--accent-border);
-            padding-bottom: 5px;
-            display: inline-block;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 15px;
+            color: white;
         }
 
-        .signals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .matrix-wrapper {
+            overflow-x: auto;
+            padding-bottom: 20px;
             margin-bottom: 60px;
         }
 
-        .signal-box {
-            background: var(--panel-bg);
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px; /* Force scroll on mobile */
+        }
+
+        .matrix-table th {
+            text-align: left;
             padding: 15px;
-            border: 1px solid var(--accent-border);
-        }
-
-        .signal-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .signal-value {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* 3. CROSS-SPEAKER SNAPSHOT */
-        .snapshot-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .snapshot-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .snapshot-col.consensus h3::before {
-            content: "";
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-consensus);
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .snapshot-col.divergence h3::before {
-            content: "";
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-divergence);
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .snapshot-item {
-            background: var(--panel-bg);
-            border: 1px solid var(--accent-border);
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-
-        /* 4. SPEAKER SECTIONS */
-        .speaker-section {
-            margin-bottom: 100px;
-            border-top: 4px solid var(--accent-border);
-            padding-top: 40px;
-        }
-
-        .speaker-meta {
-            margin-bottom: 30px;
-        }
-
-        .speaker-name {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .speaker-worldview {
-            font-size: 1.2rem;
             color: var(--text-secondary);
-            margin-top: 5px;
-            font-family: var(--font-mono);
-        }
-
-        /* Signal Strip */
-        .speaker-signals {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 25px;
-            padding: 15px 0;
-            border-top: 1px solid var(--accent-border);
-            border-bottom: 1px solid var(--accent-border);
-            background: rgba(21, 26, 35, 0.5);
-        }
-
-        .mini-signal {
-            flex: 1;
-            min-width: 140px;
-        }
-
-        .mini-signal label {
-            display: block;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            font-family: var(--font-mono);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-dark);
+            position: sticky; /* Sticky headers for vertical scroll if needed */
+            top: 0;
         }
 
-        .mini-signal span {
-            font-weight: 600;
-            font-size: 0.95rem;
+        .matrix-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+            background: var(--bg-card);
+            transition: background 0.2s;
         }
+        
+        .matrix-table tr:hover td { background: var(--bg-card-hover); }
 
-        /* Full Body Area */
-        .report-body {
-            margin-top: 40px;
-        }
+        .speaker-col { width: 22%; }
+        .speaker-col h3 { font-size: 1.1rem; margin-bottom: 5px; color: white; }
+        .speaker-role { font-size: 0.8rem; color: var(--text-secondary); font-style: italic; }
 
-        .report-subhead {
-            font-family: var(--font-mono);
-            color: var(--accent-highlight);
-            font-size: 1rem;
-            margin-top: 40px;
-            margin-bottom: 15px;
+        .matrix-cell-title {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .report-text {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            max-width: 65ch; /* Optimal reading width */
-        }
+        .cell-content { font-size: 0.95rem; line-height: 1.5; }
 
-        /* 5. THEME INDEX */
-        .theme-index {
-            background: var(--panel-bg);
-            padding: 30px;
-            border: 1px solid var(--accent-border);
+        /* --- 3. Consensus vs Divergence --- */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             margin-bottom: 60px;
         }
 
-        .theme-list {
-            list-style: none;
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .insight-card h3 { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .insight-list { list-style: none; }
+        .insight-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .insight-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+        .consensus-card h3::before { content: "🤝"; }
+        .divergence-card h3::before { content: "⚔️"; }
+
+        /* --- 4. Speaker Deep Dive --- */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Wider cards */
+            gap: 30px;
+        }
+
+        .speaker-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .speaker-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .theme-list li a {
-            color: var(--text-primary);
-            text-decoration: none;
-            border-bottom: 1px solid var(--text-muted);
-            padding-bottom: 2px;
-            transition: color 0.2s;
+        .speaker-header h2 { font-size: 1.4rem; color: white; }
+        .speaker-header p { color: var(--accent-blue); font-size: 0.9rem; margin-top: 4px; }
+
+        .detail-row { margin-bottom: 20px; }
+        .detail-label { 
+            font-size: 0.8rem; 
+            color: var(--text-secondary); 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            margin-bottom: 6px; 
+            display: block;
+        }
+        .detail-text { color: var(--text-primary); }
+
+        .quote-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-blue);
+            padding: 15px;
+            margin-top: 25px;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        .theme-list li a:hover {
-            color: var(--accent-highlight);
-            border-color: var(--accent-highlight);
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--accent-border);
-            padding-top: 20px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-align: center;
-        }
-
+        /* Responsive tweaks */
         @media (max-width: 768px) {
-            .snapshot-container {
-                grid-template-columns: 1fr;
-            }
-            .speaker-signals {
-                flex-direction: column;
-                gap: 15px;
-            }
+            .speakers-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .section-title { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -296,177 +220,256 @@
 
     <header>
         <h1>2026 Crypto Market Outlook</h1>
-        <div class="subtitle">[INSERT POSITIONING SUBTITLE HERE]</div>
+        <p class="subtitle">Bankless 觀點匯總儀表板：從宏觀數據到風投賽道，四種視角看懂市場共識與分歧。</p>
     </header>
 
     <section>
-        <div class="section-title">01 // Executive Signals</div>
-        <div class="signals-grid">
-            <div class="signal-box">
-                <span class="signal-label">Global Liquidity</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-            <div class="signal-box">
-                <span class="signal-label">Institutional Flows</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-            <div class="signal-box">
-                <span class="signal-label">Regulation</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-            <div class="signal-box">
-                <span class="signal-label">Market Structure</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-            <div class="signal-box">
-                <span class="signal-label">Volatility Regime</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-            <div class="signal-box">
-                <span class="signal-label">Dominance Trend</span>
-                <span class="signal-value placeholder">[INSERT SIGNAL]</span>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="section-title">02 // Consensus & Divergence</div>
-        <div class="snapshot-container">
-            <div class="snapshot-col consensus">
-                <h3>Consensus</h3>
-                <div class="snapshot-item">
-                    <div class="placeholder">[HIGH CONVICTION AGREEMENT 1]</div>
-                </div>
-                <div class="snapshot-item">
-                    <div class="placeholder">[HIGH CONVICTION AGREEMENT 2]</div>
-                </div>
-                <div class="snapshot-item">
-                    <div class="placeholder">[HIGH CONVICTION AGREEMENT 3]</div>
-                </div>
-            </div>
-
-            <div class="snapshot-col divergence">
-                <h3>Divergence</h3>
-                <div class="snapshot-item">
-                    <div class="placeholder">[MAJOR POINT OF DISAGREEMENT 1]</div>
-                </div>
-                <div class="snapshot-item">
-                    <div class="placeholder">[MAJOR POINT OF DISAGREEMENT 2]</div>
-                </div>
-                <div class="snapshot-item">
-                    <div class="placeholder">[MAJOR POINT OF DISAGREEMENT 3]</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <article class="speaker-section">
+        <h2 class="section-title">01 // 觀點比較矩陣 (The Matrix)</h2>
+        <p style="margin-bottom: 15px; color: var(--text-secondary); font-size: 0.9rem;">← 手機版請左右滑動查看完整比較 →</p>
         
-        <div class="speaker-meta">
-            <h2 class="speaker-name">[SPEAKER NAME 1]</h2>
-            <div class="speaker-worldview placeholder">[INSERT ONE-LINE WORLDVIEW SUMMARY]</div>
-        </div>
+        <div class="matrix-wrapper">
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">講者</th>
+                        <th>核心立場</th>
+                        <th>比特幣 (BTC)</th>
+                        <th>以太坊 (ETH)</th>
+                        <th>2026 關鍵賽道</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="speaker-col">
+                            <h3>Ben Cowen</h3>
+                            <div class="speaker-role">宏觀數據派 (保守)</div>
+                        </td>
+                        <td>
+                            <span class="tag bear">Bearish</span><br>
+                            <span style="font-size: 0.9rem;">週期可能已見頂，目前處於牛市陷阱。</span>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>看空/修正</strong><br>
+                                類似 2019 年走勢，需守住 50週均線 ($102k) 否則轉熊。
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>極度謹慎</strong><br>
+                                像 Tesla 的 Higher Low 結構，雖目標 $5,300 但可能是逃命波。
+                            </div>
+                        </td>
+                        <td>
+                            現金與黃金。<br>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem;">明確表示「沒有山寨季 (No Alt Season)」。</span>
+                        </td>
+                    </tr>
 
-        <div class="speaker-signals">
-            <div class="mini-signal">
-                <label>BTC View</label>
-                <span class="placeholder">[BULL/BEAR/NEUTRAL]</span>
-            </div>
-            <div class="mini-signal">
-                <label>ETH View</label>
-                <span class="placeholder">[OUTPERFORM/LAG]</span>
-            </div>
-            <div class="mini-signal">
-                <label>Key Sector</label>
-                <span class="placeholder">[SECTOR PICK]</span>
-            </div>
-            <div class="mini-signal">
-                <label>Primary Risk</label>
-                <span class="placeholder">[BIGGEST THREAT]</span>
-            </div>
-            <div class="mini-signal">
-                <label>Time Horizon</label>
-                <span class="placeholder">[Q1 / Q2 / YEAR]</span>
-            </div>
-        </div>
+                    <tr>
+                        <td class="speaker-col">
+                            <h3>Bankless Hosts</h3>
+                            <div class="speaker-role">機構採用派 (樂觀)</div>
+                        </td>
+                        <td>
+                            <span class="tag bull">Bullish</span><br>
+                            <span style="font-size: 0.9rem;">機構全面進場，穩定幣取代銀行。</span>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>看漲 (目標 $140k)</strong><br>
+                                宏觀驅動的超級週期，但擔憂長期量子威脅。
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>資產弱 / 網絡強</strong><br>
+                                雖價格疲軟，但作為「統一帳本」基本面極佳。
+                            </div>
+                        </td>
+                        <td>
+                            穩定幣支付 (Stablecoins)<br>
+                            預測市場 (Polymarket)<br>
+                            代幣化資產 (RWA)
+                        </td>
+                    </tr>
 
-        <div class="report-body">
-            
-            <div class="long-form-placeholder">
-                [CONTENT PROVIDED BY USER – SPEAKER SUMMARY START]
-            </div>
+                    <tr>
+                        <td class="speaker-col">
+                            <h3>Bankless VC</h3>
+                            <div class="speaker-role">風投獵人 (賽道)</div>
+                        </td>
+                        <td>
+                            <span class="tag neutral">Alpha Focus</span><br>
+                            <span style="font-size: 0.9rem;">不看大盤，專注尋找 100x 新賽道。</span>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>中立/共識</strong><br>
+                                關注 BlackRock 等機構訊號，認為加密已成主流共識。
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>基礎設施</strong><br>
+                                重點在於 ETH 之上的應用層創新 (DeFi Neobanks)。
+                            </div>
+                        </td>
+                        <td>
+                            垂直型 RWA (車貸/寶可夢)<br>
+                            AI Agents (AI代理人)<br>
+                            意見市場 (Opinion Markets)
+                        </td>
+                    </tr>
 
-            <h4 class="report-subhead">Market Framework</h4>
-            <div class="report-text">
-                <p class="placeholder">[INSERT LONG-FORM TEXT: CORE THESIS & MACRO FRAMEWORK]</p>
-                <br><br>
-                <p class="placeholder">[INSERT CONTINUATION OF FRAMEWORK]</p>
-            </div>
-
-            <h4 class="report-subhead">Bitcoin Outlook</h4>
-            <div class="report-text">
-                <p class="placeholder">[INSERT LONG-FORM TEXT: SPECIFIC BITCOIN ANALYSIS]</p>
-            </div>
-
-            <h4 class="report-subhead">Ethereum Outlook</h4>
-            <div class="report-text">
-                <p class="placeholder">[INSERT LONG-FORM TEXT: SPECIFIC ETHEREUM ANALYSIS]</p>
-            </div>
-
-            <h4 class="report-subhead">Sector Deep Dive</h4>
-            <div class="report-text">
-                <p class="placeholder">[INSERT LONG-FORM TEXT: TOP ALTCOIN OR SECTOR THESIS]</p>
-            </div>
-
-            <h4 class="report-subhead">Risks & Assumptions</h4>
-            <div class="report-text">
-                <p class="placeholder">[INSERT LONG-FORM TEXT: INVALIDATION CRITERIA]</p>
-            </div>
-
-        </div>
-    </article>
-    <article class="speaker-section">
-        <div class="speaker-meta">
-            <h2 class="speaker-name">[SPEAKER NAME 2]</h2>
-            <div class="speaker-worldview placeholder">[INSERT ONE-LINE WORLDVIEW SUMMARY]</div>
-        </div>
-        <div class="speaker-signals">
-            <div class="mini-signal"><label>BTC View</label><span class="placeholder">[VIEW]</span></div>
-            <div class="mini-signal"><label>ETH View</label><span class="placeholder">[VIEW]</span></div>
-            <div class="mini-signal"><label>Key Sector</label><span class="placeholder">[VIEW]</span></div>
-            <div class="mini-signal"><label>Primary Risk</label><span class="placeholder">[VIEW]</span></div>
-            <div class="mini-signal"><label>Time Horizon</label><span class="placeholder">[VIEW]</span></div>
-        </div>
-        <div class="report-body">
-            <div class="long-form-placeholder">[CONTENT PROVIDED BY USER – SPEAKER SUMMARY START]</div>
-            <p class="report-text">[Additional content structure repeats as above...]</p>
-        </div>
-    </article>
-
-
-    <section>
-        <div class="section-title">03 // Thematic Index</div>
-        <div class="theme-index">
-            <ul class="theme-list">
-                <li><a href="#">Bitcoin</a></li>
-                <li><a href="#">Ethereum</a></li>
-                <li><a href="#">DeFi</a></li>
-                <li><a href="#">Tokenization (RWA)</a></li>
-                <li><a href="#">Market Structure</a></li>
-                <li><a href="#">Stablecoins</a></li>
-                <li><a href="#">Infrastructure</a></li>
-                <li><a href="#">Regulation</a></li>
-            </ul>
+                    <tr>
+                        <td class="speaker-col">
+                            <h3>Mike Ippolito</h3>
+                            <div class="speaker-role">基本面派 (成熟)</div>
+                        </td>
+                        <td>
+                            <span class="tag bear">Cautious</span><br>
+                            <span style="font-size: 0.9rem;">類似 2002 網路泡沫後，回歸基本面。</span>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>艱難的一年</strong><br>
+                                情緒面轉差，量子計算恐成為下跌藉口。
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-content">
+                                <strong>文藝復興 (Renaissance)</strong><br>
+                                RWA 發行的最大贏家，網絡效應將被重估。
+                            </div>
+                        </td>
+                        <td>
+                            DeFi 信用基金<br>
+                            企業鏈 (Corporate Chains)<br>
+                            產業整併 (Consolidation)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
-    <footer>
-        <p>Research Structure Generated for 2026 Crypto Market Outlook. Internal Use Only.</p>
-    </footer>
+    <section>
+        <h2 class="section-title">02 // 關鍵戰場 (Key Battlegrounds)</h2>
+        <div class="insights-grid">
+            <div class="insight-card consensus-card">
+                <h3 style="color: var(--accent-green);">高度共識 (Consensus)</h3>
+                <ul class="insight-list">
+                    <li><strong>RWA 是 2026 主軸：</strong> 除了 Ben Cowen 外，所有人都認為真實資產上鏈 (RWA) 是最大的增長點。</li>
+                    <li><strong>預測市場 (Prediction Markets)：</strong> 被視為加密貨幣最成功的消費級應用 (Killer App)。</li>
+                    <li><strong>量子威脅 (Quantum Threat)：</strong> Bankless 主持人與 Mike Ippolito 不約而同提到量子計算是比特幣長期最大的隱憂。</li>
+                    <li><strong>山寨幣大清洗：</strong> 所有人都同意「隨便買隨便漲」的時代結束了，資金將集中在少數優質資產。</li>
+                </ul>
+            </div>
+
+            <div class="insight-card divergence-card">
+                <h3 style="color: var(--accent-red);">重大分歧 (Divergence)</h3>
+                <ul class="insight-list">
+                    <li><strong>ETH 的命運：</strong> Ben Cowen 認為是「牛市陷阱」；Mike Ippolito 認為將迎來「文藝復興」；Bankless 認為「價格雖爛但技術很強」。</li>
+                    <li><strong>比特幣走勢：</strong> 機構派看漲至 $140k；宏觀派與基本面派則警告可能會有深度回調。</li>
+                    <li><strong>市場階段定義：</strong> Ben Cowen 認為是「週期末端」；Mike 認為是「基礎建設期 (2002)」；VC 認為是「新賽道爆發期」。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">03 // 講者深度觀點 (Deep Dives)</h2>
+        <div class="speakers-grid">
+
+            <article class="speaker-card">
+                <div class="speaker-header">
+                    <div>
+                        <h2>Ben Cowen</h2>
+                        <p>Into The Cryptoverse 創辦人</p>
+                    </div>
+                    <span class="tag bear">Macro Bear</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">核心論點</span>
+                    <p class="detail-text">不要跟聯準會作對。市場流動性不足，目前只是少數幣種的獨角戲。若比特幣跌破 50 週均線，熊市確認。</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">獨家警示</span>
+                    <p class="detail-text" style="color: var(--accent-red);">2026 年不會有全面山寨季 (No Broad Alt Season)。</p>
+                </div>
+                <div class="quote-box">
+                    "If you wait for the robins, spring will be over." (等你看到知更鳥才進場，春天早就結束了。)
+                </div>
+            </article>
+
+            <article class="speaker-card">
+                <div class="speaker-header">
+                    <div>
+                        <h2>Ryan & David</h2>
+                        <p>Bankless Hosts</p>
+                    </div>
+                    <span class="tag bull">Institutional Bull</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">核心論點</span>
+                    <p class="detail-text">加密貨幣與傳統金融 (TradFi) 的界線模糊化。穩定幣將成為全球支付軌道，ETF 將帶來數百億美元資金。</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">獨家警示</span>
+                    <p class="detail-text" style="color: var(--accent-yellow);">量子計算 (Quantum Computing) 是比特幣必須正視的灰犀牛。</p>
+                </div>
+                <div class="quote-box">
+                    "Public blockchains become TradFi infrastructure." (公有鏈將成為傳統金融的基礎設施。)
+                </div>
+            </article>
+
+            <article class="speaker-card">
+                <div class="speaker-header">
+                    <div>
+                        <h2>Ben & Arnav</h2>
+                        <p>Bankless Ventures</p>
+                    </div>
+                    <span class="tag neutral">VC Thesis</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">核心論點</span>
+                    <p class="detail-text">忽略大盤噪音，尋找具有「結構性變革」的賽道。看好垂直領域的 RWA 平台（如專做車貸上鏈）與 AI Agents。</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">獨家觀點</span>
+                    <p class="detail-text">金融虛無主義 (Financial Nihilism) 是年輕人轉向高風險投機的主因。</p>
+                </div>
+                <div class="quote-box">
+                    "Young people see speculation as the only path to upward mobility." (年輕人將投機視為翻身的唯一途徑。)
+                </div>
+            </article>
+
+            <article class="speaker-card">
+                <div class="speaker-header">
+                    <div>
+                        <h2>Mike Ippolito</h2>
+                        <p>Blockworks 共同創辦人</p>
+                    </div>
+                    <span class="tag bear">Fundamentalist</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">核心論點</span>
+                    <p class="detail-text">加密產業正處於類似 2002 年網路泡沫後的「清理與整合期」。活下來就是贏家。新 L1 公鏈已無機會。</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">獨家觀點</span>
+                    <p class="detail-text" style="color: var(--accent-blue);">ETH 將贏得 RWA 發行市場，並重新獲得市場青睞 (Renaissance)。</p>
+                </div>
+                <div class="quote-box">
+                    "The new Layer 1 trade is dead. Consolidation is the key theme." (新 L1 公鏈交易已死，整合才是關鍵。)
+                </div>
+            </article>
+
+        </div>
+    </section>
 
 </div>
 
 </body>
 </html>
-
-```
